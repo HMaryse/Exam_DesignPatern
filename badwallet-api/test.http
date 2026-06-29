@@ -1,5 +1,30 @@
 @walletHost = http://localhost:8080
 
+### Create wallet
+
+POST {{walletHost}}/api/wallets
+Content-Type: application/json
+
+{
+  "phoneNumber": "0612345678",
+  "email": "test@example.com",
+  "initialBalance": 100.00,
+  "code": "ABC123",
+  "currency": "XOF"
+}
+
+### Get wallets page 0
+
+GET {{walletHost}}/api/wallets?page=0&size=10
+
+### Get wallet by phone number
+
+GET {{walletHost}}/api/wallets/0612345678
+
+### Get wallet balance
+
+GET {{walletHost}}/api/wallets/0612345678/balance
+
 ### Seeder
 
 POST {{walletHost}}/api/wallets/seed?numWallets=10&eventsPerWallet=100
