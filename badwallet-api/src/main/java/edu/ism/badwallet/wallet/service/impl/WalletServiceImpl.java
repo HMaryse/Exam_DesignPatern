@@ -9,6 +9,11 @@ import edu.ism.badwallet.wallet.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 @Service
 @RequiredArgsConstructor
 public class WalletServiceImpl implements WalletService {
@@ -42,5 +47,44 @@ public class WalletServiceImpl implements WalletService {
                 .balance(savedWallet.getBalance())
                 .currency(savedWallet.getCurrency())
                 .build();
+    }
+    @Override
+    public Page<WalletResponse> getAll(int page, int size) {
+
+        return walletRepository.findAll(PageRequest.of(page, size))
+                .map(wallet -> WalletResponse.builder()
+                        .id(wallet.getId())
+                        .code(wallet.getCode())
+                        .phoneNumber(wallet.getPhoneNumber())
+                        .email(wallet.getEmail())
+                        .balance(wallet.getBalance())
+                        .currency(wallet.getCurrency())
+                        .build());
+
+    }
+    @Override
+    public WalletResponse getByPhoneNumber(String phoneNumber) {
+
+        Wallet wallet = walletRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new RuntimeException("Wallet introuvable"));
+
+        return WalletResponse.builder()
+                .id(wallet.getId())
+                .code(wallet.getCode())
+                .phoneNumber(wallet.getPhoneNumber())
+                .email(wallet.getEmail())
+                .balance(wallet.getBalance())
+                .currency(wallet.getCurrency())
+                .build();
+
+    }
+    @Override
+    public BigDecimal getBalance(String phoneNumber) {
+
+        Wallet wallet = walletRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new RuntimeException("Wallet introuvable"));
+
+        return wallet.getBalance();
+
     }
 }
