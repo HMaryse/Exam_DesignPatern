@@ -5,17 +5,18 @@ import edu.ism.badwallet.wallet.entity.Wallet;
 
 public class WalletFactory {
 
-    private WalletFactory() {
-    }
+    private WalletFactory(){}
 
-    public static Wallet create(CreateWalletRequest request) {
+    public static Wallet create(CreateWalletRequest request){
 
         return Wallet.builder()
-                .code(request.getCode())
                 .phoneNumber(request.getPhoneNumber())
                 .email(request.getEmail())
+                .code(request.getCode())
                 .balance(request.getInitialBalance())
                 .currency(request.getCurrency())
                 .build();
+
     }
+
 }

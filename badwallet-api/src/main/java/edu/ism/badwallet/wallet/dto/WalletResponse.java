@@ -21,4 +21,5 @@ public class WalletResponse {
     private BigDecimal balance;
 
     private Currency currency;
+
 }

@@ -14,8 +14,8 @@ public class CreateWalletRequest {
     @NotBlank
     private String phoneNumber;
 
-    @NotBlank
     @Email
+    @NotBlank
     private String email;
 
     @NotNull
@@ -26,4 +26,5 @@ public class CreateWalletRequest {
 
     @NotNull
     private Currency currency;
+
 }
