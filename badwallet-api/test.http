@@ -1,0 +1,5 @@
+@walletHost = http://localhost:8080
+
+### Seeder
+
+POST {{walletHost}}/api/wallets/seed?numWallets=10&eventsPerWallet=100
